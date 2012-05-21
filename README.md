@@ -1,12 +1,12 @@
-postal.diagnostics
+# postal.diagnostics
 
 # Version 0.6.1
 
 # What is it?
-postal.diagnostics is a plug-in for [postal.js](https://github.com/ifandelse/postal.js) that enables the ability to wiretap the message bus and log all or a filtered subset of messages.  You provide a `DiagnosticsWireTap` instance with a "writer" callback - enabling you to write the logged messages to the console (for example), or to the file system (node.js), DOM Element, websocket or nearly anything else you can imagine.
+postal.diagnostics is a plug-in for [postal.js](https://github.com/ifandelse/postal.js) that enables a 'smart' wiretap on message bus to log all or a filtered subset of messages.  You provide a `DiagnosticsWireTap` instance with a "writer" callback - enabling you to write the logged messages to the console (for example), or to the file system (node.js), DOM Element, websocket or nearly anything else that can be a "writer target".
 
 # Why would I use it?
-Developing a browser or node.js application using a local message bus like [postal.js](https://github.com/ifandelse/postal.js) can greatly benefit from design/debug-time console logging.  The postal.diagnostics plugin gives you tight control over what gets logged out to your writer callback, so it's fairly simple to narrow down your logged output to the messages you want to see.  Having good visibility into the messages being published can greatly assist you in seeing the components of your application interact, and can help resolve odd runtime edge cases.
+Developing a browser or node.js application using a local message bus like [postal.js](https://github.com/ifandelse/postal.js) can greatly benefit from design/debug-time console logging.  The postal.diagnostics plugin gives you tight control over what gets logged out to your writer callback, so it's fairly simple to narrow down your logged output to the messages you want to see.  Having good visibility into the messages being published assists you in seeing the components of your application interact, and helps resolve odd runtime edge cases.
 
 # Ok, great, so *how* do I use it?
 
@@ -15,14 +15,14 @@ Developing a browser or node.js application using a local message bus like [post
 * For amd browser usage, the module returns the constructor function (i.e. - `require(['postal.diagnostics'], function(DiagnosticsWireTap) { /* use the constructor here */ });`
 * For node.js, the module returns the constructor function (i.e. - `var DiagnosticsWireTap = require('./postal.diagnostics')(_, postal)`)
 * The DiagnosticsWireTap constructor takes 3 arguments:
-	* `name`    - the name given to the wiretap (it should be unique - and is most often used to identify *where* it's logging to.  Example, "console".  This value will be used to attach your wiretap instance to the postal.diagnostics namespace (ex. - postal.diagnostics.console).
+	* `name`    - the name given to the wiretap (it should be unique - and is most often used to identify *where* it's logging to.  Example, "console").  This value will be used to attach your wiretap instance to the postal.diagnostics namespace (ex. - postal.diagnostics.console).
 	* `writer`  - the callback function that takes one arg (the message envelope) and provides the implementation of how/where to write the desired data.  Simple example: `function(env) { console.log(JSON.stringify(env)); }`
 	* `filters` - optional array of filters that will constrain which envelopes get passed to the `writer` callback. (Filters can also be added later using the `addFilter` method.)
 * The DiagnosticsWireTap prototype/implementation:
 	* `filters` - an array of filters currently being used by the diagnostics wiretap instance.
 	* `active` - boolean flag (defaults to true) that turns the wiretap off and on
 	* `removeWireTap` - removes the wiretap from postal
-	* `applyFilter` - helper method used to apply a given filter to a message envelope, which passes it to the writer callback if it passes the filter test
+	* `applyFilter` - helper method used to apply a given filter to a message envelope, which passes it to the writer callback if it passes the filter test (you should not need to invoke this directly).
 	* `clearFilters` - removes all filters from the `filters` array.
 	* `removeFilter` - removes a specific filter
 	* `addFilter` - accepts a single filter or an array of filters for the wiretap to use for constraining which envelopes get passed to the writer callback
@@ -43,7 +43,7 @@ define(['postal.diagnostics'], function(DiagnosticsWireTap) {
 	// other stuff here.....
 });
 
-// node.js, postal and underscore need to be passed to the function returned by the module
+// node.js - postal and underscore need to be passed to the function returned by the module
 var _ = require('underscore');
 var postal = require('postal');
 var DiagnosticsWireTap = require('postal.diagnostics')(_, postal);
@@ -108,3 +108,6 @@ var wireTap = new DiagnosticsWireTap("console", function(env) {
         * navigate to the root of the repo and run `anvil --host`
         * navigate in your browser to http://localhost:3080/spec for tests
         * navigate in your browser to http://localhost:3080/example for tests
+
+## License
+postal.diagnostics is dual-licensed MIT & GPL - use whichever is appropriate for your project.
