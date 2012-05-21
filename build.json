@@ -1,0 +1,28 @@
+{
+	"source" : "src",
+	"output" : "lib",
+	"spec" : "spec",
+	"ext" : "ext",
+	"lint" : {},
+	"uglify" : {
+		"exclude" : ["postal.diagnostics.node.js"]
+	},
+	"hosts" : {
+		"/spec" : "./spec",
+		"/example" : "./example",
+		"/lib" : "./lib",
+		"/ext" : "./ext",
+		"/src" : "./src"
+	},
+	"extensions" : {
+		"uglify" : "min"
+	},
+	"name" : {
+		"postal.diagnostics.amd.js"          : "amd/postal.diagnostics.js",
+		"postal.diagnostics.amd.min.js"      : "amd/postal.diagnostics.min.js",
+		"postal.diagnostics.standard.js"     : "standard/postal.diagnostics.js",
+		"postal.diagnostics.standard.min.js" : "standard/postal.diagnostics.min.js",
+		"postal.diagnostics.node.js"         : "node/postal.diagnostics.js"
+	},
+	"working" : "./tmp"
+}
