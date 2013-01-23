@@ -13,14 +13,15 @@ Developing a browser or node.js application using a local message bus like [post
 * For non-amd browser usage you can access the DiagnosticsWireTap constructor from `postal.diagnostics.DiagnosticsWireTap`
 * For amd usage, the module returns the constructor function (i.e. - `require(['postal.diagnostics'], function(DiagnosticsWireTap) { /* use the constructor here */ });`
 * For node.js, the module returns the constructor function (i.e. - `var DiagnosticsWireTap = require('./postal.diagnostics')(_, postal)`)
-* The DiagnosticsWireTap constructor takes 2 arguments:
-	* `name`    - the name given to the wiretap (it should be unique - and is most often used to identify *where* it's logging to.  Example, "console").  This value will be used to attach your wiretap instance to the postal.diagnostics namespace (ex. - postal.diagnostics.console).
+* The DiagnosticsWireTap constructor takes 1 argument:
 	* `options` - the options object can provide any of the following members (none are required)
+		* `name`    - the name given to the wiretap (it should be unique - and is most often used to identify *where* it's logging to.  Example, "console").  This value will be used to attach your wiretap instance to the postal.diagnostics namespace (ex. - postal.diagnostics.console). If you don't provide one, a name will be provided for you.
 		* `writer`  - a function that takes one arg (the serialized message envelope) and provides the implementation of how/where to write the desired data.  Simple example: `function(output) { console.log(output); }` (which is also the default value)
 		* `serialize` - a function that takes one arg (the envelope) and returns the desired format to represent the envelope. If you don't want to serialize, you'd simply `function(envelope) { return envelope; }`. *OR* you can stringify it with formatting: `function(envelope) { return JSON.stringify(envelope, null, 4) }` (that example is the default value).
 		* `filters` - optional array of filters that will constrain which envelopes get passed to the `writer` callback. (Filters can also be added later using the `addFilter` method.)
 		* 'active' - boolean which is used to indicate if the wire tap should be active or not. This defaults to `true`.
 * DiagnosticsWireTap instance members
+	* `name` - unique name of the wire tap instance.
 	* `filters` - an array of filters currently being used by the diagnostics wiretap instance.
 	* `active` - boolean flag (defaults to true) that turns the wiretap off and on
 	* `removeWireTap` - removes the wiretap from postal
@@ -35,12 +36,12 @@ Developing a browser or node.js application using a local message bus like [post
 ```javascript
 // simple wire tap:
 // serializes the envelope via JSON.stringify(envelope, null, 4)
-// and writes it to console.log
-var wireTap = new postal.diagnostics.DiagnosticsWireTap("console");
+// and writes it to console.log (it also gets a default name)
+var wireTap = new postal.diagnostics.DiagnosticsWireTap();
 
 // using AMD/require.js
 define(['postal.diagnostics'], function(DiagnosticsWireTap) {
-	var wireTap = new postal.diagnostics.DiagnosticsWireTap("console");
+	var wireTap = new postal.diagnostics.DiagnosticsWireTap({ name: "console" });
 	// other stuff here.....
 });
 
@@ -49,7 +50,7 @@ var _ = require('underscore');
 var postal = require('postal');
 var DiagnosticsWireTap = require('postal.diagnostics')(_, postal);
 
-var wireTap = new DiagnosticsWireTap("console");
+var wireTap = new DiagnosticsWireTap({name: "console"});
 
 ```
 
@@ -85,7 +86,8 @@ Here's an example of instantiating a `DiagnosticsWireTap` with 3 filters:
 ```javascript
 // The filters below (3rd argument) mean that ANY envelope that passes
 // at least one of the filters will be passed to the writer callback
-var wireTap = new DiagnosticsWireTap("console", {
+var wireTap = new DiagnosticsWireTap({
+	name: "console",
 	filters: [
 		{ channel: "MyChannel" },
 		{ data: { foo: /bar/ } },
