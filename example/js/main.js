@@ -1,5 +1,5 @@
 $( function () {
-	var diags = new postal.diagnostics.DiagnosticsWireTap("console");
+	var diags = new postal.diagnostics.DiagnosticsWireTap();
 
 	// This gets you a handle to the default postal channel...
 	// For grins, you can get a named channel instead like this:
