@@ -1,28 +1,17 @@
 {
-	"source" : "src",
-	"output" : "lib",
-	"spec" : "spec",
-	"ext" : "ext",
-	"lint" : {},
-	"uglify" : {
-		"exclude" : ["postal.diagnostics.node.js"]
+	"anvil.uglify" : {
+		"all" : true
 	},
-	"hosts" : {
-		"/spec" : "./spec",
-		"/example" : "./example",
-		"/lib" : "./lib",
-		"/ext" : "./ext",
-		"/src" : "./src"
+	"anvil.http" : {
+		"paths" : {
+			"/"             : "./"
+		}
 	},
-	"extensions" : {
-		"uglify" : "min"
+	"anvil.jshint" : {
+		"all" : true
 	},
-	"name" : {
-		"postal.diagnostics.amd.js"          : "amd/postal.diagnostics.js",
-		"postal.diagnostics.amd.min.js"      : "amd/postal.diagnostics.min.js",
-		"postal.diagnostics.standard.js"     : "standard/postal.diagnostics.js",
-		"postal.diagnostics.standard.min.js" : "standard/postal.diagnostics.min.js",
-		"postal.diagnostics.node.js"         : "node/postal.diagnostics.js"
+	"output" : {
+		"full" : "lib"
 	},
-	"working" : "./tmp"
+	"dependencies" : [ "anvil.http", "anvil.uglify", "anvil.jshint" ]
 }

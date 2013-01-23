@@ -9,3 +9,8 @@ _ReSharper*
 desktop.ini
 .eprj
 .idea
+.DS_Store
+.eprj
+.anvil
+*node_modules*
+*npm-debug*

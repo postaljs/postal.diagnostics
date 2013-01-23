@@ -1,32 +1,31 @@
 var wiretap,
 	msgs = [];
-QUnit.reorder = false;
-QUnit.specify( "postal.diagnostics", function () {
+describe( "postal.diagnostics", function () {
 	describe( "With DiagnosticsWireTap", function () {
 
-		before(function() {
-			wiretap = new DiagnosticsWireTap("test", function(x) { msgs.push(x); });
+		beforeEach(function() {
+			wiretap = new postal.diagnostics.DiagnosticsWireTap("test", { writer: function(x) { msgs.push(x); } });
 		});
-		after(function() {
+		afterEach(function() {
 			msgs = [];
 		});
 		describe("when not logging anything", function() {
 			it("should not capture any messages", function() {
-				assert(msgs.length).isEqualTo(0);
+				expect(msgs.length).to.be(0);
 			});
 			it("should not have any filters", function() {
-				assert(wiretap.filters.length).isEqualTo(0);
+				expect(wiretap.filters.length).to.be(0);
 			});
 			it("should default to active", function() {
-				assert(wiretap.active).isEqualTo(true);
+				expect(wiretap.active).to.be(true);
 			});
 		});
 		describe("when adding a filter with plain string match", function() {
-			before(function(){
+			beforeEach(function(){
 				wiretap.addFilter({ data: "bacon" });
 			});
 			it("should have one filter", function() {
-				assert(wiretap.filters.length).isEqualTo(1);
+				expect(wiretap.filters.length).to.be(1);
 			});
 			it("should filter a valid match", function(){
 				var env = postal.publish({
@@ -34,8 +33,8 @@ QUnit.specify( "postal.diagnostics", function () {
 					topic: "Anything.Really",
 					data: "bacon"
 				});
-				assert(msgs.length).isEqualTo(1);
-				assert(msgs[0]).isEqualTo(JSON.stringify(env));
+				expect(msgs.length).to.be(1);
+				expect(msgs[0]).to.be(JSON.stringify(env, null, 4));
 			});
 			it("should *not* filter an invalid match", function(){
 				var env = postal.publish({
@@ -43,16 +42,16 @@ QUnit.specify( "postal.diagnostics", function () {
 					topic: "Anything.Really",
 					data: "baconista"
 				});
-				assert(msgs.length).isEqualTo(0);
-				assert(msgs[0]).isNotEqualTo(JSON.stringify(env));
+				expect(msgs.length).to.be(0);
+				expect(msgs[0]).to.not.be(JSON.stringify(env, null, 4));
 			});
 		});
 		describe("when adding a filter with regex match", function() {
-			before(function(){
+			beforeEach(function(){
 				wiretap.addFilter({ data: /bacon/ });
 			});
 			it("should have one filter", function() {
-				assert(wiretap.filters.length).isEqualTo(1);
+				expect(wiretap.filters.length).to.be(1);
 			});
 			it("should filter a valid match", function(){
 				var env = postal.publish({
@@ -60,8 +59,8 @@ QUnit.specify( "postal.diagnostics", function () {
 					topic: "Anything.Really",
 					data: "bacon"
 				});
-				assert(msgs.length).isEqualTo(1);
-				assert(msgs[0]).isEqualTo(JSON.stringify(env));
+				expect(msgs.length).to.be(1);
+				expect(msgs[0]).to.be(JSON.stringify(env, null, 4));
 			});
 			it("should filter a second valid match", function(){
 				var env = postal.publish({
@@ -69,8 +68,8 @@ QUnit.specify( "postal.diagnostics", function () {
 					topic: "Anything.Really",
 					data: "baconista"
 				});
-				assert(msgs.length).isEqualTo(1);
-				assert(msgs[0]).isEqualTo(JSON.stringify(env));
+				expect(msgs.length).to.be(1);
+				expect(msgs[0]).to.be(JSON.stringify(env, null, 4));
 			});
 			it("should *not* filter an invalid match", function(){
 				var env = postal.publish({
@@ -78,12 +77,12 @@ QUnit.specify( "postal.diagnostics", function () {
 					topic: "Anything.Really",
 					data: "barkin"
 				});
-				assert(msgs.length).isEqualTo(0);
-				assert(msgs[0]).isNotEqualTo(JSON.stringify(env));
+				expect(msgs.length).to.be(0);
+				expect(msgs[0]).to.not.be(JSON.stringify(env, null, 4));
 			});
 		});
 		describe("when adding a complex filter", function() {
-			before(function(){
+			beforeEach(function(){
 				wiretap.addFilter({
 					topic: "Anything.Really",
 					data: {
@@ -93,7 +92,7 @@ QUnit.specify( "postal.diagnostics", function () {
 				});
 			});
 			it("should have one filter", function() {
-				assert(wiretap.filters.length).isEqualTo(1);
+				expect(wiretap.filters.length).to.be(1);
 			});
 			it("should filter a valid match", function(){
 				var env = postal.publish({
@@ -104,8 +103,8 @@ QUnit.specify( "postal.diagnostics", function () {
 						bacon: "sizzling"
 					}
 				});
-				assert(msgs.length).isEqualTo(1);
-				assert(msgs[0]).isEqualTo(JSON.stringify(env));
+				expect(msgs.length).to.be(1);
+				expect(msgs[0]).to.be(JSON.stringify(env, null, 4));
 			});
 			it("should *not* filter an invalid match", function(){
 				var env = postal.publish({
@@ -113,8 +112,8 @@ QUnit.specify( "postal.diagnostics", function () {
 					topic: "Anything.Really",
 					data: "barkin"
 				});
-				assert(msgs.length).isEqualTo(0);
-				assert(msgs[0]).isNotEqualTo(JSON.stringify(env));
+				expect(msgs.length).to.be(0);
+				expect(msgs[0]).to.not.be(JSON.stringify(env, null, 4));
 			});
 			it("should *not* filter another invalid match", function(){
 				var env = postal.publish({
@@ -125,12 +124,12 @@ QUnit.specify( "postal.diagnostics", function () {
 						bacon: "sizzling"
 					}
 				});
-				assert(msgs.length).isEqualTo(0);
-				assert(msgs[0]).isNotEqualTo(JSON.stringify(env));
+				expect(msgs.length).to.be(0);
+				expect(msgs[0]).to.not.be(JSON.stringify(env, null, 4));
 			});
 		});
 		describe("when clearing all filters", function() {
-			before(function(){
+			beforeEach(function(){
 				wiretap.addFilter({
 					topic: "Anything.Really",
 					data: {
@@ -139,16 +138,16 @@ QUnit.specify( "postal.diagnostics", function () {
 					}
 				});
 			});
-			it("should have one filter before clearing", function() {
-				assert(wiretap.filters.length).isEqualTo(1);
+			it("should have one filter beforeEach clearing", function() {
+				expect(wiretap.filters.length).to.be(1);
 			});
 			it("should have 0 filters after clearing", function(){
 				wiretap.clearFilters();
-				assert(wiretap.filters.length).isEqualTo(0);
+				expect(wiretap.filters.length).to.be(0);
 			});
 		});
 		describe("when clearing a specific filter", function() {
-			before(function(){
+			beforeEach(function(){
 				wiretap.addFilter({
 					topic: "Anything.Really",
 					data: {
@@ -165,7 +164,7 @@ QUnit.specify( "postal.diagnostics", function () {
 				});
 			});
 			it("should have two filters", function() {
-				assert(wiretap.filters.length).isEqualTo(2);
+				expect(wiretap.filters.length).to.be(2);
 			});
 			it("should filter valid match against either filter", function(){
 				var envA = postal.publish({
@@ -180,9 +179,9 @@ QUnit.specify( "postal.diagnostics", function () {
 					channel: "/",
 					topic: "Not.Really.Anything"
 				});
-				assert(msgs.length).isEqualTo(2);
-				assert(msgs[0]).isEqualTo(JSON.stringify(envA));
-				assert(msgs[1]).isEqualTo(JSON.stringify(envB));
+				expect(msgs.length).to.be(2);
+				expect(msgs[0]).to.be(JSON.stringify(envA, null, 4));
+				expect(msgs[1]).to.be(JSON.stringify(envB, null, 4));
 			});
 			it("should *not* filter an invalid match", function(){
 				var envA = postal.publish({
@@ -193,7 +192,7 @@ QUnit.specify( "postal.diagnostics", function () {
 						bacon: "sizzling"
 					}
 				});
-				assert(msgs.length).isEqualTo(0);
+				expect(msgs.length).to.be(0);
 			});
 			it("should filter valid matches after removing one filter", function(){
 				var envA = postal.publish({
@@ -219,9 +218,9 @@ QUnit.specify( "postal.diagnostics", function () {
 					channel: "/",
 					topic: "Not.Really.Anything"
 				});
-				assert(msgs.length).isEqualTo(2);
-				assert(msgs[0]).isEqualTo(JSON.stringify(envA));
-				assert(msgs[1]).isEqualTo(JSON.stringify(envB));
+				expect(msgs.length).to.be(2);
+				expect(msgs[0]).to.be(JSON.stringify(envA, null, 4));
+				expect(msgs[1]).to.be(JSON.stringify(envB, null, 4));
 			});
 		});
 	});
