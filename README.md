@@ -103,7 +103,7 @@ var wireTap = new DiagnosticsWireTap("console", {
         * install anvil.js (`npm install -g anvil.js`)
         * navigate to the root of the repo and run `anvil` - then check the lib folder for the output
     * To run tests & examples
-        * navigate to the root of the repo and run `anvil --host --browser`
+        * navigate to the root of the repo and run `anvil --host --browser	`
         * navigate in your browser to http://localhost:3080/spec for tests
         * navigate in your browser to http://localhost:3080/example for tests
 

@@ -4,7 +4,7 @@ describe( "postal.diagnostics", function () {
 	describe( "With DiagnosticsWireTap", function () {
 
 		beforeEach(function() {
-			wiretap = new postal.diagnostics.DiagnosticsWireTap("test", { writer: function(x) { msgs.push(x); } });
+			wiretap = new postal.diagnostics.DiagnosticsWireTap({ name: "test", writer: function(x) { msgs.push(x); } });
 		});
 		afterEach(function() {
 			msgs = [];

@@ -7,7 +7,7 @@
 	} else if ( typeof define === "function" && define.amd ) {
 		// AMD. Register as an anonymous module.
 		define( ["underscore", "postal"], function ( _, postal ) {
-			return factory( postal, _, root );
+			return factory( _, postal, root );
 		} );
 	} else {
 		// Browser globals
@@ -15,43 +15,34 @@
 	}
 }( typeof window !== 'undefined' ? window : this, function ( _, postal, global, undefined ) {
 
-	postal.diagnostics = postal.diagnostics || {};
+	postal.diagnostics = {};
 
-	var DiagnosticsWireTap = function ( name, options ) {
-		var self = this;
+	var DiagnosticsWireTap = function ( options ) {
 		options = options || {};
-		options.writer = options.writer || function(output) {
-			console.log(output);
-		};
+		_.extend(this, { active: true, filters: [], name: _.uniqueId('wiretap_')}, options);
 
-		if(options.serialize) {
-			this.serialize = options.serialize;
+		this.removeWireTap = postal.addWireTap( _.bind(this.wiretapFn, this) );
+
+		if ( postal.diagnostics[this.name] ) {
+			postal.diagnostics[this.name].removeWireTap();
 		}
+		postal.diagnostics[this.name] = this;
+	};
 
-		self.filters = options.filters || [];
-
-		self.active = options.hasOwnProperty('active') ? options.active : true;
-
-		self.removeWireTap = postal.addWireTap( function ( data, envelope ) {
-			if( !self.active ) {
-				return;
-			}
-			if( !self.filters.length || _.any( self.filters, function ( filter ) {
-				return self.applyFilter( filter, envelope );
-			})) {
-				try {
-					options.writer( self.serialize( envelope ) );
-				}
-				catch ( exception ) {
-					options.writer( "Unable to serialize envelope: " + exception );
-				}
-			}
-		} );
-
-		if ( postal.diagnostics[name] ) {
-			postal.diagnostics[name].removeWireTap();
+	DiagnosticsWireTap.prototype.wiretapFn = function ( data, envelope ) {
+		if( !this.active ) {
+			return;
 		}
-		postal.diagnostics[name] = self;
+		if( !this.filters.length || _.any( this.filters, function ( filter ) {
+			return this.applyFilter( filter, envelope );
+		}, this)) {
+			try {
+				this.writer( this.serialize( envelope ) );
+			}
+			catch ( exception ) {
+				this.writer( "Unable to serialize envelope: " + exception );
+			}
+		}
 	};
 
 	DiagnosticsWireTap.prototype.applyFilter = function ( filter, env ) {
@@ -107,6 +98,12 @@
 		return JSON.stringify(env, null, 4);
 	};
 
+	DiagnosticsWireTap.prototype.writer = function(output) {
+		console.log(output);
+	};
+
 	postal.diagnostics.DiagnosticsWireTap = DiagnosticsWireTap;
+
+	return DiagnosticsWireTap;
 
 } ));
