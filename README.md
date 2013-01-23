@@ -41,7 +41,7 @@ var wireTap = new postal.diagnostics.DiagnosticsWireTap();
 
 // using AMD/require.js
 define(['postal.diagnostics'], function(DiagnosticsWireTap) {
-	var wireTap = new postal.diagnostics.DiagnosticsWireTap({ name: "console" });
+	var wireTap = new DiagnosticsWireTap({ name: "console" });
 	// other stuff here.....
 });
 
