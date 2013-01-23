@@ -84,7 +84,7 @@ As mentioned above, filters can be provided when you instantiate the wiretap, or
 Here's an example of instantiating a `DiagnosticsWireTap` with 3 filters:
 
 ```javascript
-// The filters below (3rd argument) mean that ANY envelope that passes
+// The filters below mean that ANY envelope that passes
 // at least one of the filters will be passed to the writer callback
 var wireTap = new DiagnosticsWireTap({
 	name: "console",
