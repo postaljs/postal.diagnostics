@@ -1,0 +1,21 @@
+{
+  "name": "postal.diagnostics.js",
+  "version": "0.7.0",
+  "main": [
+    "lib/postal.diagnostics.js",
+    "lib/postal.diagnostics.min.js"
+  ],
+  "dependencies": {
+    "underscore": "~1.5.2"
+  },
+  "devDependencies": {
+    "jquery": "~1.10.2",
+    "bootstrap": "~3.0.3",
+    "expect": "0.1.2",
+    "mocha": "~1.17.0",
+    "postal.js": "0.8.11"
+  },
+  "resolutions": {
+    "underscore": "~1.5.2"
+  }
+}

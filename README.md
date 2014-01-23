@@ -33,6 +33,7 @@ Developing a browser or node.js application using a local message bus like [post
 * See below for examples
 
 ## Instantiating a DiagnosticsWireTap
+
 ```javascript
 // simple wire tap:
 // serializes the envelope via JSON.stringify(envelope, null, 4)
@@ -100,14 +101,15 @@ var wireTap = new DiagnosticsWireTap({
 
 * In case it's not obvious already, postal.diagnostics depends on [postal.js](https://github.com/postaljs/postal.js)
 * postal.diagnostics also depends on [underscore.js](http://underscorejs.org/)
-* postal.diagnostics uses [anvil.js](http://anvil-js.com/) for building, running tests and examples.
+* postal.diagnostics uses [gulp.js](http://gulpjs.com/) for building, running tests and examples.
 	* To build
-        * install anvil.js (`npm install -g anvil.js`)
-        * navigate to the root of the repo and run `anvil` - then check the lib folder for the output
+        * run `npm install` (to install all deps)
+        * run `npm run build` - then check the lib folder for the output
     * To run tests & examples
-        * navigate to the root of the repo and run `anvil --host --browser	`
-        * navigate in your browser to http://localhost:3080/spec for tests
-        * navigate in your browser to http://localhost:3080/example for tests
+        * To run node-based tests: `npm run test`
+        * To run browser-based tests & examples:
+            * run `npm start`
+            * navigate in your browser to <http://localhost:3080/>
 
 ## License
 postal.diagnostics is dual-licensed MIT & GPL - use whichever is appropriate for your project.
