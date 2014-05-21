@@ -1,6 +1,6 @@
 {
     "name": "postal.diagnostics",
-    "version": "0.7.2",
+    "version": "0.7.3",
     "main": ["lib/postal.diagnostics.js"],
     "dependencies": {
         "lodash": "~2.4.1"
