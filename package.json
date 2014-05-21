@@ -17,6 +17,19 @@
         "email": "PleaseJustUseTheIssuesPage@github.com",
         "url": "http://github.com/postaljs/postal.diagnostics/issues"
     },
+    "keywords": [
+        "pub/sub",
+        "pub",
+        "sub",
+        "messaging",
+        "message",
+        "bus",
+        "event",
+        "wiretap",
+        "postal",
+        "diagnostics",
+        "logging"
+    ],
     "directories": {
         "lib": "lib"
     },

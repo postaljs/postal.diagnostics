@@ -8,6 +8,19 @@
     "dependencies": {
         "lodash": "~2.4.1"
     },
+    "keywords": [
+        "pub/sub",
+        "pub",
+        "sub",
+        "messaging",
+        "message",
+        "bus",
+        "event",
+        "wiretap",
+        "postal",
+        "diagnostics",
+        "logging"
+    ],
     "devDependencies": {
         "jquery": "~1.10.2",
         "bootstrap": "~3.0.3",
