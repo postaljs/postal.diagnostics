@@ -1,6 +1,6 @@
 # postal.diagnostics
 
-# Version 0.7.0
+# Version 0.7.1
 
 # What is it?
 postal.diagnostics is a plug-in for [postal.js](https://github.com/postaljs/postal.js) that enables a 'smart' wiretap on message bus to log all or a filtered subset of messages.  You provide a `DiagnosticsWireTap` instance with a "writer" callback - enabling you to write the logged messages to the console (for example), or to the file system (node.js), DOM Element, websocket or nearly anything else that can be a "writer target".
@@ -46,10 +46,11 @@ define(['postal.diagnostics'], function(DiagnosticsWireTap) {
 	// other stuff here.....
 });
 
-// node.js - postal and underscore need to be passed to the function returned by the module
-var _ = require('underscore');
+// node.js - postal needs to be passed to the function returned by the module
+// this pattern is common to all postal add-ons in node.js, since they need to
+// act on the same instance of postal.
 var postal = require('postal');
-var DiagnosticsWireTap = require('postal.diagnostics')(_, postal);
+var DiagnosticsWireTap = require('postal.diagnostics')( postal );
 
 var wireTap = new DiagnosticsWireTap({name: "console"});
 
@@ -100,7 +101,7 @@ var wireTap = new DiagnosticsWireTap({
 ## Build, Dependencies, etc.
 
 * In case it's not obvious already, postal.diagnostics depends on [postal.js](https://github.com/postaljs/postal.js)
-* postal.diagnostics also depends on [underscore.js](http://underscorejs.org/)
+* postal.diagnostics also depends on [lodash](http://lodash.com/)
 * postal.diagnostics uses [gulp.js](http://gulpjs.com/) for building, running tests and examples.
 	* To build
         * run `npm install` (to install all deps)

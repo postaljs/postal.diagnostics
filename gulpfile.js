@@ -1,18 +1,17 @@
-var gulp        = require("gulp");
+var gulp = require("gulp");
 var fileImports = require("gulp-imports");
-var header      = require("gulp-header");
-var beautify    = require("gulp-beautify");
-var hintNot     = require("gulp-hint-not");
-var uglify      = require("gulp-uglify");
-var rename      = require("gulp-rename");
-var plato       = require("gulp-plato");
-var rimraf      = require("gulp-rimraf");
-var gutil       = require("gulp-util");
-var express     = require("express");
-var path        = require("path");
-var pkg         = require("./package.json");
-var open        = require("open");
-var port        = 3080;
+var header = require("gulp-header");
+var beautify = require("gulp-beautify");
+var hintNot = require("gulp-hint-not");
+var uglify = require("gulp-uglify");
+var rename = require("gulp-rename");
+var plato = require("gulp-plato");
+var gutil = require("gulp-util");
+var express = require("express");
+var path = require("path");
+var pkg = require("./package.json");
+var open = require("open");
+var port = 3080;
 
 var banner = ["/**",
     " * <%= pkg.name %> - <%= pkg.description %>",
@@ -21,17 +20,28 @@ var banner = ["/**",
     " * Url: <%= pkg.homepage %>",
     " * License(s): <% pkg.licenses.forEach(function( license, idx ){ %><%= license.type %><% if(idx !== pkg.licenses.length-1) { %>, <% } %><% }); %>",
     " */",
-    ""].join("\n");
+    ""
+].join("\n");
 
 gulp.task("combine", function() {
     gulp.src(["./src/postal.diagnostics.js"])
-        .pipe(header(banner, { pkg : pkg }))
+        .pipe(header(banner, {
+            pkg: pkg
+        }))
         .pipe(fileImports())
         .pipe(hintNot())
-        .pipe(beautify({indentSize: 4}))
+        .pipe(beautify({
+            indentSize: 4
+        }))
         .pipe(gulp.dest("./lib/"))
-        .pipe(uglify({ compress: { negate_iife: false }}))
-        .pipe(header(banner, { pkg : pkg }))
+        .pipe(uglify({
+            compress: {
+                negate_iife: false
+            }
+        }))
+        .pipe(header(banner, {
+            pkg: pkg
+        }))
         .pipe(rename("postal.diagnostics.min.js"))
         .pipe(gulp.dest("./lib/"));
 });
@@ -40,7 +50,7 @@ gulp.task("default", function() {
     gulp.run("combine");
 });
 
-gulp.task("report", function () {
+gulp.task("report", function() {
     gulp.src("./lib/postal.diagnostics.js")
         .pipe(plato("report"));
 });
@@ -60,10 +70,10 @@ var createServer = function(port) {
 
 var servers;
 
-gulp.task("server", function(){
+gulp.task("server", function() {
     gulp.run("report");
-    if(!servers) {
+    if (!servers) {
         servers = createServer(port);
     }
-    open( "http://localhost:" + port + "/index.html" );
+    open("http://localhost:" + port + "/index.html");
 });

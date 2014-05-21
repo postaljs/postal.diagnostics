@@ -1,8 +1,8 @@
 {
-	"name"    : "postal.diagnostics",
-	"version" : "0.7.0",
-	"main"    : ["lib/postal.diagnostics.js"],
-	"dependencies": {
-		"underscore": "~1.1.7"
-	}
+    "name": "postal.diagnostics",
+    "version": "0.7.1",
+    "main": ["lib/postal.diagnostics.js"],
+    "dependencies": {
+        "lodash": "~2.4.1"
+    }
 }
