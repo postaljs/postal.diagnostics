@@ -1,6 +1,6 @@
 {
     "name": "postal.diagnostics.js",
-    "version": "0.7.1",
+    "version": "0.7.2",
     "main": [
         "lib/postal.diagnostics.js",
         "lib/postal.diagnostics.min.js"
@@ -26,6 +26,6 @@
         "bootstrap": "~3.0.3",
         "expect": "0.1.2",
         "mocha": "~1.17.0",
-        "postal.js": ">=0.6.0"
+        "postal.js": ">=0.8.0"
     }
 }

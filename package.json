@@ -1,7 +1,7 @@
 {
     "name": "postal.diagnostics",
     "description": "Wiretap add-on for postal.js allowing configurable console.logging (or other) output of messages being published through postal's message bus.",
-    "version": "0.7.1",
+    "version": "0.7.2",
     "homepage": "https://github.com/postaljs/postal.diagnostics",
     "repository": {
         "type": "git",
@@ -39,7 +39,7 @@
     },
     "dependencies": {
         "lodash": "~2.4.1",
-        "postal": ">=0.6.0"
+        "postal": ">=0.8.0"
     },
     "devDependencies": {
         "bower": "~1.2.8",
