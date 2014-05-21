@@ -7,7 +7,7 @@
         postal = require("../node_modules/postal/lib/postal")();
         expect = require("../node_modules/expect.js/expect");
         _ = require("lodash");
-        require("../lib/postal.diagnostics")(_, postal);
+        require("../lib/postal.diagnostics")(postal);
     } else {
         postal = window.postal;
         expect = window.expect;
