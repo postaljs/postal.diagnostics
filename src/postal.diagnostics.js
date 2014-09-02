@@ -34,7 +34,7 @@
         postal.diagnostics[this.name] = this;
     };
 
-    DiagnosticsWireTap.prototype.wiretapFn = function(data, envelope) {
+    DiagnosticsWireTap.prototype.wiretapFn = function(data, envelope, nesting) {
         if (!this.active) {
             return;
         }
@@ -42,7 +42,7 @@
             return this.applyFilter(filter, envelope);
         }, this)) {
             try {
-                this.writer(this.serialize(envelope));
+                this.writer(this.serialize(envelope), nesting);
             } catch (exception) {
                 this.writer("Unable to serialize envelope: " + exception);
             }

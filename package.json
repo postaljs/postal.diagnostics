@@ -39,7 +39,7 @@
     },
     "dependencies": {
         "lodash": "~2.4.1",
-        "postal": ">=0.8.0"
+        "postal": ">=0.10.3"
     },
     "devDependencies": {
         "bower": "~1.2.8",
