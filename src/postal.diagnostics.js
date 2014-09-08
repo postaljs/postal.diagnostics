@@ -23,7 +23,8 @@
         _.extend(this, {
             active: true,
             filters: [],
-            name: _.uniqueId("wiretap_")
+            name: _.uniqueId("wiretap_"),
+            includeNesting: false
         }, options);
 
         this.removeWireTap = postal.addWireTap(_.bind(this.wiretapFn, this));
@@ -101,8 +102,12 @@
         return JSON.stringify(env, null, 4);
     };
 
-    DiagnosticsWireTap.prototype.writer = function(output) {
-        console.log(output);
+    DiagnosticsWireTap.prototype.writer = function(output, nesting) {
+        if(this.includeNesting) {
+            console.log(output, "\t(nesting level: ", nesting, ")");
+        } else {
+            console.log(output);
+        }
     };
 
     postal.diagnostics.DiagnosticsWireTap = DiagnosticsWireTap;

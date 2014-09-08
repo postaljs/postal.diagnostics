@@ -1,6 +1,6 @@
 # postal.diagnostics
 
-# Version 0.7.2
+# Version 0.7.4
 
 # What is it?
 postal.diagnostics is a plug-in for [postal.js](https://github.com/postaljs/postal.js) that enables a 'smart' wiretap on message bus to log all or a filtered subset of messages.  You provide a `DiagnosticsWireTap` instance with a "writer" callback - enabling you to write the logged messages to the console (for example), or to the file system (node.js), DOM Element, websocket or nearly anything else that can be a "writer target".

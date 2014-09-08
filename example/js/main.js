@@ -1,5 +1,5 @@
 $( function () {
-	var diags = new postal.diagnostics.DiagnosticsWireTap();
+	var diags = new postal.diagnostics.DiagnosticsWireTap({ includeNesting: true });
 
 	// This gets you a handle to the default postal channel...
 	// For grins, you can get a named channel instead like this:

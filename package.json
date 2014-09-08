@@ -1,7 +1,7 @@
 {
     "name": "postal.diagnostics",
     "description": "Wiretap add-on for postal.js allowing configurable console.logging (or other) output of messages being published through postal's message bus.",
-    "version": "0.7.3",
+    "version": "0.7.4",
     "homepage": "https://github.com/postaljs/postal.diagnostics",
     "repository": {
         "type": "git",
@@ -12,6 +12,11 @@
         "name": "Jim Cowart",
         "email": "WhyNotJustComment@OnMyBlog.com",
         "url": "http://freshbrewedcode.com/jimcowart"
+    },
+    {
+        "name": "Anthony van der Hoorn",
+        "email": "WhyNotJustComment@OnMyBlog.com",
+        "url": "http://blog.anthonyvanderhoorn.com/"
     }],
     "bugs": {
         "email": "PleaseJustUseTheIssuesPage@github.com",

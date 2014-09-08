@@ -4,7 +4,7 @@
     var expect;
     var _;
     if (typeof window === "undefined") {
-        postal = require("../node_modules/postal/lib/postal")();
+        postal = require("../node_modules/postal/lib/postal");
         expect = require("../node_modules/expect.js/expect");
         _ = require("lodash");
         require("../lib/postal.diagnostics")(postal);
