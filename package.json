@@ -1,78 +1,84 @@
 {
-    "name": "postal.diagnostics",
-    "description": "Wiretap add-on for postal.js allowing configurable console.logging (or other) output of messages being published through postal's message bus.",
-    "version": "0.7.4",
-    "homepage": "https://github.com/postaljs/postal.diagnostics",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/postaljs/postal.diagnostics"
-    },
-    "author": "Jim Cowart (http://freshbrewedcode.com/jimcowart)",
-    "contributors": [{
-        "name": "Jim Cowart",
-        "email": "WhyNotJustComment@OnMyBlog.com",
-        "url": "http://freshbrewedcode.com/jimcowart"
+  "name": "postal.diagnostics",
+  "description": "Wiretap add-on for postal.js allowing configurable console.logging (or other) output of messages being published through postal's message bus.",
+  "version": "0.7.4",
+  "homepage": "https://github.com/postaljs/postal.diagnostics",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/postaljs/postal.diagnostics"
+  },
+  "author": "Jim Cowart (http://freshbrewedcode.com/jimcowart)",
+  "contributors": [
+    {
+      "name": "Jim Cowart",
+      "email": "WhyNotJustComment@OnMyBlog.com",
+      "url": "http://freshbrewedcode.com/jimcowart"
     },
     {
-        "name": "Anthony van der Hoorn",
-        "email": "WhyNotJustComment@OnMyBlog.com",
-        "url": "http://blog.anthonyvanderhoorn.com/"
-    }],
-    "bugs": {
-        "email": "PleaseJustUseTheIssuesPage@github.com",
-        "url": "http://github.com/postaljs/postal.diagnostics/issues"
-    },
-    "keywords": [
-        "pub/sub",
-        "pub",
-        "sub",
-        "messaging",
-        "message",
-        "bus",
-        "event",
-        "wiretap",
-        "postal",
-        "diagnostics",
-        "logging"
-    ],
-    "directories": {
-        "lib": "lib"
-    },
-    "main": "lib/postal.diagnostics.js",
-    "engines": {
-        "node": ">=0.4.0"
-    },
-    "dependencies": {
-        "lodash": "~2.4.1",
-        "postal": ">=0.10.3"
-    },
-    "devDependencies": {
-        "bower": "~1.2.8",
-        "gulp": "~3.4.0",
-        "gulp-util": "~2.2.9",
-        "gulp-imports": "~0.0.1",
-        "gulp-header": "~1.0.2",
-        "gulp-hint-not": "~0.0.3",
-        "gulp-uglify": "~0.1.0",
-        "gulp-rename": "~0.2.1",
-        "gulp-plato": "~0.1.0",
-        "gulp-beautify": "~1.0.3",
-        "tiny-lr": "0.0.5",
-        "express": "~3.4.7",
-        "gulp-rimraf": "0.0.8",
-        "open": "~0.0.4",
-        "expect.js": "~0.2.0"
-    },
-    "licenses": [{
-        "type": "MIT",
-        "url": "http://www.opensource.org/licenses/mit-license.php"
-    }, {
-        "type": "GPL",
-        "url": "http://www.opensource.org/licenses/gpl-3.0.html"
-    }],
-    "scripts": {
-        "test": "mocha ./spec/*.js",
-        "build": "gulp",
-        "start": "gulp server"
+      "name": "Anthony van der Hoorn",
+      "email": "WhyNotJustComment@OnMyBlog.com",
+      "url": "http://blog.anthonyvanderhoorn.com/"
     }
+  ],
+  "bugs": {
+    "email": "PleaseJustUseTheIssuesPage@github.com",
+    "url": "http://github.com/postaljs/postal.diagnostics/issues"
+  },
+  "keywords": [
+    "pub/sub",
+    "pub",
+    "sub",
+    "messaging",
+    "message",
+    "bus",
+    "event",
+    "wiretap",
+    "postal",
+    "diagnostics",
+    "logging"
+  ],
+  "directories": {
+    "lib": "lib"
+  },
+  "main": "lib/postal.diagnostics.js",
+  "engines": {
+    "node": ">=0.4.0"
+  },
+  "dependencies": {
+    "lodash": "~2.4.1",
+    "postal": ">=0.10.3"
+  },
+  "devDependencies": {
+    "bower": "~1.2.8",
+    "expect.js": "~0.2.0",
+    "express": "~3.4.7",
+    "gulp": "~3.4.0",
+    "gulp-beautify": "~1.0.3",
+    "gulp-header": "~1.0.2",
+    "gulp-hint-not": "~0.0.3",
+    "gulp-imports": "~0.0.1",
+    "gulp-plato": "~0.1.0",
+    "gulp-rename": "~0.2.1",
+    "gulp-rimraf": "0.0.8",
+    "gulp-uglify": "~0.1.0",
+    "gulp-util": "~2.2.9",
+    "mocha": "^2.2.4",
+    "open": "~0.0.4",
+    "tiny-lr": "0.0.5"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/mit-license.php"
+    },
+    {
+      "type": "GPL",
+      "url": "http://www.opensource.org/licenses/gpl-3.0.html"
+    }
+  ],
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha ./spec/*.js",
+    "build": "./node_modules/gulp/bin/gulp.js",
+    "start": "./node_modules/gulp/bin/gulp.js server"
+  }
 }
