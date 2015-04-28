@@ -6,7 +6,7 @@
         "lib/postal.diagnostics.min.js"
     ],
     "dependencies": {
-        "lodash": "~2.4.1"
+        "postal.js": ">=0.10.3"
     },
     "keywords": [
         "pub/sub",
@@ -25,7 +25,6 @@
         "jquery": "~1.10.2",
         "bootstrap": "~3.0.3",
         "expect": "0.1.2",
-        "mocha": "~1.17.0",
-        "postal.js": ">=0.10.3"
+        "mocha": "~1.17.0"
     }
 }
